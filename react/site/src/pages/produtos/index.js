@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import { Container, Conteudo } from './styled'
+import React, { useRef } from 'react'
+import LoadingBar from 'react-top-loading-bar'
 
 import { useState, useEffect } from 'react';
 
@@ -24,6 +26,7 @@ export default function Index() {
     const [estoque, setEstoque] = useState('');
     const [imgproduto, setImgproduto] = useState('');
     const [idProduto, setIdProduto] = useState(0);
+    const loading = useRef(null);
     
     
     
@@ -35,6 +38,7 @@ export default function Index() {
     }
 
     async function inserir(){
+        loading.current.continuousStart();
         if(idProduto === 0){
         let r = await api.inserir(nproduto, categoria, preco_de, preco_por, avaliacao, dsproduto, estoque, imgproduto);
 
@@ -42,6 +46,8 @@ export default function Index() {
             alert(r.erro);
             else
         alert('🚀 Produto inserido');
+        
+        
         } else {
         let r = await api.alterar(idProduto, nproduto, categoria, preco_de, preco_por, avaliacao, dsproduto, estoque, imgproduto);
         if(r.erro)
@@ -49,11 +55,12 @@ export default function Index() {
             else
         alert('✏️ Produto alterado');
 
-
+        
         }
 
         limparcampos();
         listar();
+        loading.current.complete();
     }
  
     function limparcampos() {
@@ -113,6 +120,7 @@ export default function Index() {
 
     return (
         <Container>
+             <LoadingBar color='#119FDC' ref={loading}/> 
             <Menu />
             <Conteudo>
                 <Cabecalho />

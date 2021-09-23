@@ -4,6 +4,7 @@ import { Container } from './styled'
 export default function Index() {
     return (
         <Container>
+            
             <header className="header-left-box">
                 <div className="svg-cabecalho-left-box"> <img src="/assets/images/Vector.png" alt="" /></div>
                 <div className="devSchool"> <span>Dev</span>Store</div>
