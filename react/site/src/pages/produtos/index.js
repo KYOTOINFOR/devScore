@@ -1,7 +1,7 @@
 
 import Cabecalho from '../../components/cabecalho'
 import Menu from '../../components/menu'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert'
 import 'react-confirm-alert/src/react-confirm-alert.css'
@@ -33,7 +33,7 @@ export default function Index() {
 
     async function listar() {
         let r = await api.listar();
-        console.log(r);
+    
         setProdutos(r);
     }
 
